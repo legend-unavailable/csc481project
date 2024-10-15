@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Login from "./pages/Login"
+import Home from "./pages/Home";
 import axios from 'axios'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const[response, setResponse] = useState('');
@@ -13,9 +15,15 @@ function App() {
 
   useEffect(() => {
     fetchAPI();
-  }, [])
+  }, []);
+  
   return (
-    <Login response={response}/>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Login response={response}/>}/>
+        <Route path="/home" element={<Home/>}/>
+      </Routes>
+    </Router>
   )
 }
 

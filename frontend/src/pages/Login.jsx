@@ -1,29 +1,33 @@
 import { useState } from "react";
 import users from "./Users"
-import {Navigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const Login = (props) =>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState();
     const [showErr, setErr] = useState(false);
+    const navigate = useNavigate();
 
     const checkEmail = () => {
         let exists = false;
         users.forEach((obj) => {if(obj.email === email) exists = true;})
         return exists;
     }
-    const checkPassword = (password) => {
+    const checkPassword = () => {
         let exists = false;
         users.forEach((obj) => {if(obj.password === password) exists = true;})
         return exists;
     }
     const validate = (event) => {
         event.preventDefault();
+        console.log(checkEmail());
+        console.log(checkPassword());
+
         if(checkEmail() && checkPassword()) {
             setErr(false);
-            Navigate('/Home.jsx');
+            navigate('/home');
         
-        }//go to next pages
+        }
         else setErr(true);
     }
     const handleEmail = (event) => setEmail(event.target.value);
