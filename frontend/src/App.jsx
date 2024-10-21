@@ -20,11 +20,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Login response={response}/>}/>
-        <Route path="/home" element={<Home/>}/>
+        <Route path="/" element={<Login response={response} />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
 export default App
