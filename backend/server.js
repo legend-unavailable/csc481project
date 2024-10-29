@@ -7,7 +7,7 @@ const corsOptions = {origin: ['http://localhost:5173']};
 app.use(cors(corsOptions));
 
 app.get('/api', (req, res) => {
-    res.json({str: 'yuuuurrr'});
+    res.json({str: 'This message was sent from server.js'});
 });
 //http://localhost:5173/api or http://localhost:3000/api
 
