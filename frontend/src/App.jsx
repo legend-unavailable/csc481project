@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import Login from "./pages/Login"
 import Home from "./pages/Home";
+import Chat from "./pages/Chat";
+import Event_create from "./pages/Event_create";
+import Event_stats from "./pages/Event_stats";
+import Invites from "./pages/Invites";
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -22,6 +26,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Login response={response} />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/eventC" element={<Event_create />} />
+        <Route path="/eventS" element={<Event_stats />} />
+        <Route path="/invites" element={<Invites />} />
       </Routes>
     </Router>
   );
