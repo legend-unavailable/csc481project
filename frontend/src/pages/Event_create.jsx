@@ -5,14 +5,25 @@ const Event_create = () => {
     const [showList, setShowList] = useState(false);
     const [showForm, setShowForm] = useState(true);
 
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [guests, setGuests] = useState([{name: 'bob', email: 'bob@wahoo.com'}]);
+
     const dblSpace = <><br /><br /></>;
 
     const addGuests = (event) => {
         event.preventDefault();
-        
+        setGuests(guests => [...guests, {name: name, email: email}]);
+        if (guests.length > 0 || showList === true) {
+            setShowList(true);
+            for (let index = 0; index < guests.length; index++) {
+                console.log(guests.at(index));
+                
+                
+            }
+        };
 
     }
-    const guests = [{name: 'bob', email: 'bob@wahoo.com'}];
     const events = [];
     const list = guests.map(guest => {
         let id = 0
@@ -23,12 +34,10 @@ const Event_create = () => {
     const hide = (event) => {
         setShowForm(false);
         setShowInvites(true);
-        event.
-    }
+    };
     return (
       <>
-        <form>
-          {showForm && (
+        {showForm && (
             <form onSubmit={hide}>
               <label htmlFor="name">Enter a name for your event?</label>
               <br />
@@ -39,8 +48,8 @@ const Event_create = () => {
                 Specify what type of event you want to create?
               </label>
               <div id="eventType">
-                <input type="radio" name="opt1" id="" required /> Online
-                <input type="radio" name="opt2" id="" />
+                <input type="radio" name="eType" id="1" required /> Online
+                <input type="radio" name="eType" id="2" required/>
                 In Person
               </div>
               <br />
@@ -62,21 +71,19 @@ const Event_create = () => {
 
               <button type="submit">Create Event</button>
             </form>
-          )}
-
-          {showInvites && (
+        )}
+        {showInvites && (
             <form onSubmit={addGuests}>
               <label htmlFor="people">
                 Enter the names and emails of all the people who are invited
               </label>
               <br />
-              <input type="text" name="names" required />
-              <input type="email" name="guests" required />
+              <input type="text" placeholder='name' id="name" onChange={(e) => setName(e.target.value)} name="names" required />
+              <input type="email" placeholder='email' id="email" onChange={(e) => setEmail(e.target.value)} name="guests" required />
               <button>Add</button>
               {showList && list}
             </form>
-          )}
-        </form>
+        )}
       </>
     );
 }
