@@ -1,0 +1,174 @@
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    background: linear-gradient(135deg, #1a237e 0%, #4a148c 100%);
+    padding: 20px;
+}
+
+#header {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+#navbar button,
+#account button,
+#signout button {
+    background-color: #4a148c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#navbar button:hover,
+#account button:hover,
+#signout button:hover {
+    background-color: #6a1b9a;
+}
+
+#navbar {
+    position: relative;
+}
+
+#navContent {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-width: 200px;
+    z-index: 1000;
+    margin-top: 5px;
+}
+
+#navContent ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#navContent button {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #333;
+    padding: 12px 20px;
+    transition: background-color 0.3s;
+}
+
+#navContent button:hover {
+    background-color: #f5f5f5;
+}
+
+#welcome {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    text-align: center;
+}
+
+#welcome h1 {
+    margin: 0;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+#body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#messages,
+#events,
+#invites {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 1.1rem;
+    height: 100px;
+}
+
+#messages:hover,
+#events:hover,
+#invites:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+#messages {
+    border-left: 4px solid #4a148c;
+}
+
+#events {
+    border-left: 4px solid #6a1b9a;
+}
+
+#invites {
+    border-left: 4px solid #8e24aa;
+}
+
+@media (max-width: 1200px) {
+    #body {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #header {
+        padding: 0 10px;
+    }
+    
+    #buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #navbar,
+    #account,
+    #signout {
+        width: 100%;
+    }
+
+    #navbar button,
+    #account button,
+    #signout button {
+        width: 100%;
+    }
+
+    #navContent {
+        width: 100%;
+    }
+
+    #body {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}

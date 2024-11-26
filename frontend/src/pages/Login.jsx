@@ -1,7 +1,7 @@
 import { useState } from "react";
 import users from "./Users"
 import { useNavigate } from "react-router-dom";
-import './login.css'; // Elizabeth
+import "../styles/login.css";//Elizabeth added
 
 const Login = (props) =>{
     //state declarations for email, apssword, and error message
@@ -29,6 +29,12 @@ const Login = (props) =>{
         event.preventDefault();
 
         if(checkEmail() && checkPassword()) {
+            // Find the user that matches the email
+            const currentUser = users.find(user => user.email === email);
+            
+            // Store user info in localStorage
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
             setErr(false);
             navigate('/home');
         }
