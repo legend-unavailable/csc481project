@@ -2,7 +2,6 @@ import { useState } from "react";
 import users from "./Users"
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";//Elizabeth added
-import './login.css'; // Elizabeth
 import axios from "axios";
 
 const Login = (props) =>{
@@ -51,7 +50,7 @@ const Login = (props) =>{
 
     //html to be displayed
     return(
-        <form onSubmit={validate}>
+        /*<form onSubmit={validate}>
         {showErr && <p>Email or password are incorrect</p>}
         <label htmlFor="email">Enter your email</label>
         <input type="email" id="email" required placeholder="JohnDoe123@helloworld.com" onChange={handleEmail}/> <br />
@@ -60,7 +59,56 @@ const Login = (props) =>{
         <input type="text" id="password" required onChange={handlePassword}/> <br />
 
         <button type="submit">Login</button>
-        </form>
+        </form>*/
+        <div className="login-container">
+            <div className="main-content">
+                <div className="form-container">
+                    <div className="logo-container">
+                        <h1 className="logo-text">Event Management</h1>
+                    </div>
+
+                    {showErr && (
+                        <div className="error-message">
+                            Email or password are incorrect
+                        </div>
+                    )}
+
+                    <form onSubmit={validate}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                required
+                                placeholder="JohnDoe123@helloworld.com"
+                                onChange={handleEmail}
+                                value={email}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                required
+                                placeholder="Enter your password"
+                                onChange={handlePassword}
+                                value={password}
+                            />
+                        </div>
+
+                        {props.response && (
+                            <p className="response-message">{props.response}</p>
+                        )}
+
+                        <button type="submit" className="submit-btn">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     );
 }
 
