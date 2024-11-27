@@ -1,0 +1,43 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Local instance MySQL80",
+            "database": "eventmanage",
+            "username": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "192.168.1.90",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Local Instance MySQL80",
+            "database": "eventmanage",
+            "username": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "192.168.1.90",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "EventManage DB",
+            "database": "eventmanage",
+            "username": "root"
+        }
+    ]
+}
