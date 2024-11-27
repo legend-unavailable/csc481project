@@ -6,6 +6,18 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleNav = () => setShowNav(!showNav);
+
+  const showEvents = () => {
+    /*\
+    if (events.length === 0) {return (<h1></h1>)}
+    else return(<>
+      <div>
+        <h2>Event Name</h2>
+        <h4>Scheduled for Date</h4>
+      </div>  
+    <>)  
+    */
+  }
     return (
       <div>
         <div id="header">

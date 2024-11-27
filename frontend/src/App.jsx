@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Chat from "./pages/Chat";
 import Event_create from "./pages/Event_create";
 import Event_stats from "./pages/Event_stats";
+import SignUp from "./pages/SignUp";
 import Invites from "./pages/Invites";
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -25,6 +26,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login response={response} />} />
+        <Route path="signup" element={<SignUp/>}  />
         <Route path="/home" element={<Home />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/eventC" element={<Event_create />} />

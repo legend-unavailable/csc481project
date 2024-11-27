@@ -1,6 +1,7 @@
 import { useState } from "react";
 import users from "./Users"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = (props) =>{
     //state declarations for email, apssword, and error message
@@ -24,11 +25,13 @@ const Login = (props) =>{
     }
 
     //validates user info by checking email and password, if info valid navigate to home page, else return error
-    const validate = (event) => {
+    const validate = async(event) => {
         event.preventDefault();
 
         if(checkEmail() && checkPassword()) {
             setErr(false);
+            const info = {email: email, password: password};
+            axios.get("http://localhost:3000/", {info});
             navigate('/home');
         }
         else setErr(true);
@@ -40,16 +43,16 @@ const Login = (props) =>{
 
     //html to be displayed
     return(
-        <form onSubmit={validate}>
+        <form onSubmit={validate} action="GET">
         {showErr && <p>Email or password are incorrect</p>}
         <label htmlFor="email">Enter your email</label>
         <input type="email" id="email" required placeholder="JohnDoe123@helloworld.com" onChange={handleEmail}/> <br />
 
         <label htmlFor="password">Enter your password</label>
         <input type="text" id="password" required onChange={handlePassword}/> <br />
-        <p>{props.response}</p>
 
         <button type="submit">Login</button>
+        <button onClick={() => navigate('/signup')}>Sign up</button>
         </form>
     );
 }
