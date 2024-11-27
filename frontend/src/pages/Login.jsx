@@ -1,6 +1,7 @@
 import { useState } from "react";
 import users from "./Users"
 import { useNavigate } from "react-router-dom";
+import "../styles/login.css";//Elizabeth added
 import './login.css'; // Elizabeth
 import axios from "axios";
 
@@ -30,6 +31,12 @@ const Login = (props) =>{
         event.preventDefault();
 
         if(checkEmail() && checkPassword()) {
+            // Find the user that matches the email
+            const currentUser = users.find(user => user.email === email);
+            
+            // Store user info in localStorage
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            
             setErr(false);
             const info = {email: email, password: password};
             axios.get("http://localhost:3000/", {info});
