@@ -20,3 +20,5 @@ app.get('/api', (req, res) => {
 server.listen(port, () => {
     console.log('Server started on port 3000'); 
 });
+
+//this is just to test the commit

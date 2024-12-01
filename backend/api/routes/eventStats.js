@@ -1,16 +1,26 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'handling GET requests to eventCreation'
+const {deleteEvent, getAllEventsFromUser} = require('../database/database.js');
+
+//Handle get request to retrieve event data for a user
+router.get('/', async (req, res, next) => {
+    const events = await getAllEventsFromUser(req.body.user_id)
+
+    res.status(201).json({
+        events: events,
+        message: 'Here are your events!',
     });
 });
 
-router.post('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'handling POST requests to eventCreation'
+router.delete('/', async (req, res, next) => {
+    const dEvent = await deleteEvent(req.body.event_id)
+
+    res.status(201).json({
+        dEvent: dEvent,
+        message: 'Successfully deleted Event!',
     });
-});
+})
+
 
 module.exports = router;

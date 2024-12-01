@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const db = require('mysql')
 
-router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'handling GET requests to eventCreation'
-    });
-});
+const {createEvent} = require('../database/database.js');
 
-router.post('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'handling POST requests to eventCreation'
-    });
+//Handle post request to create an event
+router.post('/', async (req, res, next) => {
+    const {event_id, event_name, event_type, event_date, event_time, location, duration, max_attendees, organizer_id, created_at, updated_at} = req.body
+    const event = await createEvent(event_id, event_name, event_type, event_date, event_time, location, duration, max_attendees, organizer_id, created_at, updated_at)
+
+    res.status(201).json({
+        event: event,
+        message: "Successfully created an event!",
+    })
 });
 
 module.exports = router;
