@@ -1,5 +1,11 @@
-const express = require('express');
-const app = express();
+const http = require('http');
+const app = require('./app');
+
+const port = 3000;
+
+const server = http.createServer(app);
+
+//server.listen(port);
 
 const cors = require('cors');
 const corsOptions = {origin: ['http://localhost:5173']};
@@ -11,6 +17,6 @@ app.get('/api', (req, res) => {
 });
 //http://localhost:5173/api or http://localhost:3000/api
 
-app.listen(3000, () => {
+server.listen(port, () => {
     console.log('Server started on port 3000'); 
 });
