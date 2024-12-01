@@ -63,10 +63,10 @@ async function updateUserData(user_id, first_name, last_name, email, password_ha
         return result
 }
 
-async function userExists(user_id, password_hash){
+async function userExists(email, password_hash){
     const result = await pool.query(`
         SELECT EXISTS FROM user
-        WHERE user_id = ? AND password_hash = ?
-        `, [user_id, password_hash])
+        WHERE email = ? AND password_hash = ?
+        `, [email, password_hash])
         return result
 }
