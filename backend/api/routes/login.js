@@ -27,6 +27,7 @@ router.get('/', async (req, res, next) => {
             Location: '/home',
         })
     }
+    //need to return true/false to frontend
 });
 
 module.exports = router;

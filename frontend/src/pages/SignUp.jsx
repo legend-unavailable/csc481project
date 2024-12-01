@@ -98,11 +98,6 @@ const SignUp = () => {
           <button type="submit" onClick={submit}>
             Create Account
           </button>
-
-          <div>
-            <button>google</button>
-            <button>twitter</button>
-          </div>
         </form>
       </>
     );

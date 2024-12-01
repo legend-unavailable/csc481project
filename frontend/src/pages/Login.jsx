@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/login.css";//Elizabeth added
 import axios from "axios";
 
-const Login = (props) =>{
+const Login = () =>{
     //state declarations for email, apssword, and error message
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState();
@@ -28,6 +28,12 @@ const Login = (props) =>{
     //validates user info by checking email and password, if info valid navigate to home page, else return error
     const validate = async(event) => {
         event.preventDefault();
+        /*const info = {email: email, password: password};
+        try {
+            await axios.get('https://localhost:3000/', {info})
+        } catch (err) {
+            setErr(true);
+        }*/
 
         if(checkEmail() && checkPassword()) {
             // Find the user that matches the email
@@ -98,9 +104,6 @@ const Login = (props) =>{
                             />
                         </div>
 
-                        {props.response && (
-                            <p className="response-message">{props.response}</p>
-                        )}
 
                         <button type="submit" className="submit-btn">
                             Login
