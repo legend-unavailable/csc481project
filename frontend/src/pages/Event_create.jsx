@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Add this import
+import "../styles/Event_create.css";//Elizabeth added
 
 const Event_create = () => {
     //switch values when finished
@@ -135,4 +136,5 @@ const Event_create = () => {
       </>
     );
 }
-export default Event_create
+
+export default Event_create;
