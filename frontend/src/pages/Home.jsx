@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";//Elizabeth added
+import axios from "axios";
 
 const Home = () => {
   const [showNav, setShowNav] = useState(false);
   const navigate = useNavigate();
+  const [response, setResponse] = useState('');
 
+  const fetchApi = async() => {
+    const res = await axios.get('https://localhost:3000/home');
+    //setResponse(res.data.userInfo);
+  }
+
+  useEffect(() => {fetchApi()}, []);
   // Get user info from localStorage
   const currentUser = JSON.parse(localStorage.getItem('currentUser')) || { name: 'Guest' };
 
@@ -17,6 +25,35 @@ const Home = () => {
     navigate('/');
   };
 
+  const events = () => {
+    if (res.events.length === 0) {
+      return(<p>No upcoming events</p>)
+    }
+    else{
+      for (let i = 0; i < 3; i++) {
+        <li key={id++}>
+          <h3>{res.data.eventName}</h3><br />
+          <p>{res.data.eventDate}</p><br />
+          <p>{res.data.eventLocation}</p><br />
+        </li>        
+      }
+    }
+  }
+
+  const invites = () => {
+    if (res.events.invites === 0) {
+      return <p>No invites</p>;
+    } else {
+      for (let i = 0; i < 3; i++) {
+        <li key={id++}>
+          <h3>{res.data.eventName}</h3>
+          <br />
+          <p>Click to view invite</p>
+          <br />
+        </li>
+      }
+    }
+  };
   /*return (
       <div>
         <div id="header">
@@ -64,7 +101,7 @@ return (
           {showNav && (
             <div id="navContent">
               <ul>
-                <li><button onClick={() => navigate('/chat')}>Messages</button></li>
+                {/*<li><button onClick={() => navigate('/chat')}>Messages</button></li>*/}
                 <li><button onClick={() => navigate('/eventC')}>Create Event</button></li>
                 <li><button onClick={() => navigate('/eventS')}>View Event</button></li>
                 <li><button onClick={() => navigate('/invites')}>View Invites</button></li>
@@ -82,10 +119,11 @@ return (
       
       <div id="welcome">
           <h1>Welcome {currentUser.name}</h1>
+          {/*<h1>Welcome {res.data.name}</h1>*/}
         </div>
 
         <div id="body">
-          <div id="messages">No new messages</div>
+          {/*<div id="messages">No new messages</div>*/}
           <div id="events">No upcoming events</div>
           <div id="invites">No event invites</div>
         </div>

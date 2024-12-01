@@ -10,27 +10,28 @@ const Event_create = () => {
 
     const [name, setName] = useState();
     const [email, setEmail] = useState();
-    const [guests, setGuests] = useState([{name: 'bob', email: 'bob@wahoo.com'}]);
+    const [guests, setGuests] = useState([]);
     const [event, setEvent] = useState();
 
     const dblSpace = <><br /><br /></>;
 
     const addGuests = (event) => {
         event.preventDefault();
-        setGuests(guests => [...guests, {name: name, email: email}]);
+        setGuests([...guests, {name: name, email: email}]);
         document.getElementById('name').value = '';
         document.getElementById("email").value = "";
     }
 
-    const list = guests.map((guest, id = 0) => {
-        if (guests.length < 1) {return(
-          <p>No one has been added</p>
-        )}
-        else{
-        return(
-            <li key={id++}>Name: {guest.name} | Email: {guest.email} | ID: {id}<br /></li>
-        )}
-    });
+    const list = guests.length === 0 ? (
+        <p>No one has been added</p>
+      ) : (
+        guests.map((guest, id = 0) => (
+          <li key={id++}>
+            Name: {guest.name} | Email: {guest.email} | ID: {id}
+            <br />
+          </li>
+        ))
+      );
 
     const checkTime = () => {
       const todayDate = new Date();
