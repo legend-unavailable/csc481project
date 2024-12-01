@@ -20,6 +20,7 @@ router.get('/', async (req, res, next) => {
             Location: '/home:user_id',
         });
     }
+    //need to return true/false to frontend
 });
 
 module.exports = router;
