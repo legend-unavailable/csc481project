@@ -68,7 +68,7 @@ const Event_stats = () => {
         location: "house",
         date: "Dec 12, 2024",
         duration: "whole day",
-        atendees: [{ name: "julian", email: "julian@email.com" }],
+        attendees: [{ name: "julian", email: "julian@email.com" }],
       },
       {
         name: "meeting",
@@ -76,7 +76,7 @@ const Event_stats = () => {
         location: "zoom",
         date: "Dec 20, 2024",
         duration: "one hour",
-        atendees: [
+        attendees: [
           { name: "jesus", email: "jesus@email.com" },
           { name: "liz", email: "liz@email.com" },
         ],
@@ -224,9 +224,9 @@ const Event_stats = () => {
                 {stuff.map((event, index) => (
                   <div key={stuff.id || index} className="event-card">
                     <div className="event-card-header">
-                      <h2>{stuff.name}</h2>
-                      <span className={`event-type ${stuff.type}`}>
-                        {stuff.type}
+                      <h2>{event.name}</h2>
+                      <span className={`event-type ${event.type}`}>
+                        {event.type}
                       </span>
                     </div>
 

@@ -57,16 +57,6 @@ const Login = () =>{
 
     //html to be displayed
     return(
-        /*<form onSubmit={validate}>
-        {showErr && <p>Email or password are incorrect</p>}
-        <label htmlFor="email">Enter your email</label>
-        <input type="email" id="email" required placeholder="JohnDoe123@helloworld.com" onChange={handleEmail}/> <br />
-
-        <label htmlFor="password">Enter your password</label>
-        <input type="text" id="password" required onChange={handlePassword}/> <br />
-
-        <button type="submit">Login</button>
-        </form>*/
         <div className="login-container">
             <div className="main-content">
                 <div className="form-container">
