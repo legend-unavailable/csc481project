@@ -12,7 +12,7 @@ router.post('/', async (req, res, next) => {
     res.status(201).json({
         event: event,
         message: "Successfully created an event!",
-    })
+    });
 });
 
 module.exports = router;
