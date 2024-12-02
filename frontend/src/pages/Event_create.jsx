@@ -16,6 +16,7 @@ const Event_create = () => {
 
     const dblSpace = <><br /><br /></>;
 
+    //set the lists of guests invited and reset the input bar
     const addGuests = (event) => {
         event.preventDefault();
         setGuests([...guests, {name: name, email: email}]);
@@ -23,6 +24,7 @@ const Event_create = () => {
         document.getElementById("email").value = "";
     }
 
+    //display all invited guests
     const list = guests.length === 0 ? (
         <p>No one has been added</p>
       ) : (
@@ -34,6 +36,7 @@ const Event_create = () => {
         ))
       );
 
+      //checks date to so that all events are created at least 3 days in advance
     const checkTime = () => {
       const todayDate = new Date();
       const daysInCurrentMonth = new Date(todayDate.getFullYear(), todayDate.getMonth(), 0).getDate();
@@ -66,6 +69,7 @@ const Event_create = () => {
       //2019-02-18T12:00     
     }
 
+    //submits event info to backend
     const endEvent = async() => {
       setEvent({...event, guests: guests});
       try {
@@ -77,12 +81,15 @@ const Event_create = () => {
       navigate('/home');
     }
 
+    //switches forms
     const hide = () => {
       setShowForm(false);
       setShowInvites(true);
       console.log(event);
         
     };
+
+    //html
     return (
       <>
         {showForm && (

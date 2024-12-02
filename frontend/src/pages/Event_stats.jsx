@@ -61,6 +61,7 @@ const Event_stats = () => {
     const [event, setEvent] = useState();
     const [showEdit, setShowEdit] = useState(false);
 
+    //mock event info
     const stuff = [
       {
         name: "party",
@@ -100,6 +101,7 @@ const Event_stats = () => {
         }
     }, []);
 
+    //format event date
     const formatDate = (dateString) => {
         try {
             return new Date(dateString).toLocaleString();
@@ -112,6 +114,7 @@ const Event_stats = () => {
         return <div className="event-stats-container">Loading...</div>;
     }
 
+    //allows a user to edit event info (not functional)
     const edit = () => {
       return (
         <form  method="PUT">

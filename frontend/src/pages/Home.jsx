@@ -25,6 +25,7 @@ const Home = () => {
     navigate('/');
   };
 
+  //shows some events under the user (not functional)
   const events = () => {
     if (res.events.length === 0) {
       return(<p>No upcoming events</p>)
@@ -40,6 +41,7 @@ const Home = () => {
     }
   }
 
+  //shows invites sent to user (not functional)
   const invites = () => {
     if (res.events.invites === 0) {
       return <p>No invites</p>;
@@ -54,44 +56,7 @@ const Home = () => {
       }
     }
   };
-  /*return (
-      <div>
-        <div id="header">
-          <div id="buttons">
-            <div id="navbar">
-              <button onClick={handleNav}>Nav bar</button>
-              {showNav && (
-                <div id="navContent">
-                  <ul style={{listStyle: 'none'}}>
-                    <li><button onClick={() => navigate('/chat')}><h3>Messages</h3></button></li>
-                    <li><button onClick={() => navigate('/eventC')}><h3>Create Event</h3></button></li>
-                    <li><button onClick={() => navigate('/eventS')}><h3>View Event</h3></button></li>
-                    <li><button onClick={() => navigate('/invites')}><h3>View Invites</h3></button></li>
-                  </ul>
-                </div>
-              )}
-            </div>
-            <div id="account">
-              <button>Account settings</button>
-            </div>
-            <div id="signout">
-              <button>Sign out</button>
-            </div>
-          </div>
-          <div id="welcome">
-            <h1>Welcome |insert name|</h1>
-          </div>
-        </div>
-
-        <div id="body">
-          <div id="messages">No new messages</div>
-          <div id="events">No upcoming events</div>
-          <div id="invites">No event invites</div>
-        </div>
-      </div>
-    );
-}*/
-
+  
 return (
   <div className="home-container">  {/* Added wrapper class */}
     <div id="header">

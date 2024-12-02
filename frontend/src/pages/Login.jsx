@@ -28,6 +28,8 @@ const Login = () =>{
     //validates user info by checking email and password, if info valid navigate to home page, else return error
     const validate = async(event) => {
         event.preventDefault();
+
+        
         /*const info = {email: email, password: password};
         try {
             await axios.post('http://localhost:3000/login', {params: {email: email, password: password_hash}})
