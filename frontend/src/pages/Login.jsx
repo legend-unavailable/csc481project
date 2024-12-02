@@ -58,53 +58,64 @@ const Login = () =>{
     const handlePassword = (event) => setPassword(event.target.value);
 
     //html to be displayed
-    return(
-        <div className="login-container">
-            <div className="main-content">
-                <div className="form-container">
-                    <div className="logo-container">
-                        <h1 className="logo-text">Event Management</h1>
-                    </div>
-
-                    {showErr && (
-                        <div className="error-message">
-                            Email or password are incorrect
-                        </div>
-                    )}
-
-                    <form onSubmit={validate}>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                required
-                                placeholder="JohnDoe123@helloworld.com"
-                                onChange={handleEmail}
-                                value={email}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                id="password"
-                                required
-                                placeholder="Enter your password"
-                                onChange={handlePassword}
-                                value={password}
-                            />
-                        </div>
-
-
-                        <button type="submit" className="submit-btn">
-                            Login
-                        </button>
-                    </form>
-                </div>
+    return (
+      <div className="login-container">
+        <div className="main-content">
+          <div className="form-container">
+            <div className="logo-container">
+              <h1 className="logo-text">Event Management</h1>
             </div>
+
+            {showErr && (
+              <div className="error-message">
+                Email or password are incorrect
+              </div>
+            )}
+
+            <form onSubmit={validate}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="JohnDoe123@helloworld.com"
+                  onChange={handleEmail}
+                  value={email}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  required
+                  placeholder="Enter your password"
+                  onChange={handlePassword}
+                  value={password}
+                />
+              </div>
+
+              <button type="submit" className="submit-btn">
+                Login
+              </button>
+
+              {/* Added Sign Up Section */}
+              <div className="signup-section">
+                <p>Don't have an account?</p>
+                <button
+                  type="button"
+                  className="signup-btn"
+                  onClick={() => navigate("/signup")}
+                >
+                  Sign Up
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     );
 }
 
