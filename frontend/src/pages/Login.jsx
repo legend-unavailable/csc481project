@@ -2,6 +2,7 @@ import { useState } from "react";
 import users from "./Users"
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";//Elizabeth added
+import SignUp from "./SignUp";
 import axios from "axios";
 
 const Login = () =>{

@@ -1,3 +1,4 @@
+/* Main container styling - creates a full-height container with a gradient background */
 .login-container {
     min-height: 100vh;
     display: flex;
@@ -5,7 +6,7 @@
     font-family: Georgia, Times, "Times New Roman", serif;
     background: linear-gradient(135deg, #1a237e 0%, #4a148c 100%);
 }
-
+/* Header styling for the top of the page */
 .header {
     color: white;
     padding: 1rem;
@@ -14,7 +15,7 @@
     font-weight: bold;
     background: transparent;
 }
-
+/* Main content area styling - centers the form vertically and horizontally */
 .main-content {
     flex: 1;
     display: flex;
@@ -22,7 +23,7 @@
     align-items: center;
     padding: 1rem;
 }
-
+/* White container that holds the form */
 .form-container {
     background-color: white;
     padding: 2.5rem;
@@ -31,31 +32,47 @@
     width: 100%;
     max-width: 400px;
     position: relative;
-    display:inline;
+    /* Added properties for better centering */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
+/* Logo section at top of form */
 .logo-container {
     text-align: center;
     margin-bottom: 2rem;
+    /* Added property */
+    width: 100%;
 }
-
+/* Text styling for the logo */
 .logo-text {
     color: #333;
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
-
+/* Container for each form field */
 .form-group {
     margin-bottom: 1.5rem;
+    /* Added property */
+    width: 100%;
 }
 
+/* Form element styling */
+/* Added new style for the form itself */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* Label styling for form fields */
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
     color: #333;
 }
-
+/* Input field styling */
 .form-group input {
     width: 100%;
     padding: 0.75rem;
@@ -66,14 +83,14 @@
     background-color: #f8f9fa;
     transition: all 0.3s ease;
 }
-
+/* Input field focus state */
 .form-group input:focus {
     outline: none;
     border-color: #4a148c;
     box-shadow: 0 0 0 2px rgba(74, 20, 140, 0.1);
     background-color: white;
 }
-
+/* Submit button styling */
 .submit-btn {
     width: 100%;
     padding: 0.75rem;
@@ -85,23 +102,53 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
+/* Submit button hover state */
 .submit-btn:hover {
     background-color: #6a1b9a;
 }
-
+/* Error message styling */
 .error-message {
     background-color: #ffebee;
     color: #c62828;
     padding: 0.75rem;
     border-radius: 4px;
     margin-bottom: 1rem;
+    /* Added property */
+    width: 100%;
 }
-
+/* Response message styling */
 .response-message {
     color: #666;
     margin-bottom: 1rem;
+    /* Added property */
+    width: 100%;
 }
-form{
-    display: contents;
+
+/*Added the signup */
+.signup-section {
+    margin-top: 1.5rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.signup-section p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.signup-btn {
+    background: transparent;
+    color: #4a148c;
+    border: 2px solid #4a148c;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+    background: #4a148c;
+    color: white;
 }
