@@ -15,8 +15,17 @@ async function getAllEventsFromUser(user_id){
 }
 
 async function getEvents(){
-    const [rows] = await pool.query("SELECT * FROM events")
-    return rows[0]
+
+    let perPage = 3;
+    let page = req.query.page || 1;
+
+    const [rows] = await pool.query(`
+        SELECT * FROM events
+        ORDER BY event_date DESC
+        LIMIT perPage
+        OFFSET (page - 1) * perPage
+        `)
+    return rows
 }
 
 async function getEvent(event_id){
@@ -33,11 +42,18 @@ async function createEvent(event_id, event_name, event_type, event_date, event_t
     `, [event_id, event_name, event_type, event_date, event_time, location, duration, max_attendees, organizer_id, created_at, updated_at])
 }
 
+async function updateEvent(event_id){
+    const result = await pool.query(`
+        SELECT * FROM events WHERE event_id = ?
+        `, [event_id])
+        return result
+}
+
 async function deleteEvent(event_id){
     const [rows] = await pool.query(`
         SELECT * FROM events WHERE event_id = ?
         `, [event_id])
-        return rows
+        return rows[0]
 }
 
 async function createUser(user_id, first_name, last_name, email, password_hash, role){
@@ -70,3 +86,4 @@ async function userExists(email, password_hash){
         `, [email, password_hash])
         return result
 }
+

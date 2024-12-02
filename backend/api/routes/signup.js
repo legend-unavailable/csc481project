@@ -16,7 +16,7 @@ router.post('/signup', async (req, res, next) => {
         res.status(400).json({
             success: false,
             message: "All fields are required!",
-        })
+        });
     }
     //must check if email already exists
     const signUp = await createUser(user_id, first_name, last_name, email, password_hash, role)

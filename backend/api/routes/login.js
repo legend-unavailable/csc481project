@@ -29,7 +29,7 @@ router.post('/', async (req, res, next) => {
                 message: "Error, user not found."
             },
             Location: '/home',
-        })
+        });
     }
     //need to return true/false to frontend
 });
