@@ -10,9 +10,9 @@ import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const[response, setResponse] = useState('');
+  /*const[response, setResponse] = useState('');
   const fetchAPI = async () => {
-    const response = await axios.get('http://localhost:3000/api');
+    const response = await axios.get('http://localhost:3000/');
     setResponse(response.data.str);
     console.log(response.data.str);
     
@@ -20,12 +20,12 @@ function App() {
 
   useEffect(() => {
     fetchAPI();
-  }, []);
+  }, []);*/
   
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login response={response} />} />
+        <Route path="/" element={<Login />} />
         <Route path="signup" element={<SignUp/>}  />
         <Route path="/home" element={<Home />} />
         <Route path="/chat" element={<Chat />} />

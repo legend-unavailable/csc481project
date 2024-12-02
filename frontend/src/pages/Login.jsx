@@ -7,7 +7,7 @@ import axios from "axios";
 const Login = () =>{
     //state declarations for email, apssword, and error message
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState('');
     const [showErr, setErr] = useState(false);
     const navigate = useNavigate();
 
@@ -30,7 +30,8 @@ const Login = () =>{
         event.preventDefault();
         /*const info = {email: email, password: password};
         try {
-            await axios.get('https://localhost:3000/', {info})
+            await axios.post('http://localhost:3000/login', {params: {email: email, password: password_hash}})
+            navigate('/home')
         } catch (err) {
             setErr(true);
         }*/
@@ -45,7 +46,7 @@ const Login = () =>{
             setErr(false);
             const info = {email: email, password: password};
             axios.get("http://localhost:3000/", {info});
-            navigate('/home');
+           navigate('/home');
         }
         else setErr(true);
     }

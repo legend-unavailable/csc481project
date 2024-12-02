@@ -31,6 +31,7 @@
     width: 100%;
     max-width: 400px;
     position: relative;
+    display:inline;
 }
 
 .logo-container {
@@ -100,4 +101,7 @@
 .response-message {
     color: #666;
     margin-bottom: 1rem;
+}
+form{
+    display: contents;
 }

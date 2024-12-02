@@ -10,17 +10,21 @@ router.get('/', (req, res, next) => {
 });
 
 //Handle requests to login using user id and password and redirects to user data page
-router.get('/', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     const {email, password_hash} = req.body
     const user = userExists(email, password_hash)
 
+    console.log(email);
+    
+
     if (user){
-        res.status(301).json({
+        res.status(201).send(user);
+        /*({
             message: "Successfully logged in!",
             Location: '/home:user_id',
-        });
+        });*/
     } else {
-        res.status(400).json({
+        return res.status(400).json({
             error: {
                 message: "Error, user not found."
             },
