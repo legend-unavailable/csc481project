@@ -1,60 +1,6 @@
-<<<<<<< HEAD
-/*
-=======
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
->>>>>>> 9509d615a3504a1b6422e0abdbe5a6a03423c07c
-const Event_stats = () => {
-    const [response, setResponse] = useState('');
-    const [expand, setExpand] = useState(false);
-    const navigate = useNavigate();
-
-    const fetchAPI = async() => {
-      const res = await axios.get("http://localhost:3000/eventS");
-      setResponse(res.data.str);
-      console.log(res.data.str);
-    };
-
-    useEffect(() => {
-      fetchAPI();
-    }, []);
-
-    const list = () => {
-        if (res.data.eventCount === 0) {
-          return <p>No events found</p>;
-        } else {
-          for (let i = 0; i < res.data.eventCount; i++) {
-            <li key={id++} onClick={() => {setExpand(!expand)}}>
-              <h3>{res.data.eventName}</h3>
-              <br />
-              <p>{res.data.eventDate}</p>
-              <br />
-              <p>{res.data.eventLocation}</p>
-              <br />
-              {expand && <div>
-                <p>{res.data.eventTime}</p>
-                <p>{res.data.eventDuration}</p>
-                <p>{res.data.eventGuests}</p>
-                <button onClick={(e) => {setExpand(!expand)}}>Close</button>
-              </div>}
-            </li>;
-          }
-        }
-    }
-    return(
-        <div>
-          <button onClick={navigate('/home')}>Back</button>
-          {list}
-        </div>
-    );
-}
-export default Event_stats
-*/
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Added this import
+import axios from 'axios'; // Add this import
 import "../styles/Event_stats.css";//Elizabeth added
 
 const Event_stats = () => {
@@ -64,19 +10,27 @@ const Event_stats = () => {
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        // Get current user and events from localStorage
-        try {
-            const user = JSON.parse(localStorage.getItem('currentUser'));
-            setCurrentUser(user);
-            const storedEvents = JSON.parse(localStorage.getItem('events') || '[]');
-            setEvents(storedEvents);
-        } catch (error) {
-            console.error('Error loading data:', error);
-        } finally {
-            setLoading(false);
-        }
+        const fetchData = async () => {
+            // Get current user and events from localStorage
+            try {
+                // Gets user data from localStorage
+                const user = JSON.parse(localStorage.getItem('currentUser'));
+                setCurrentUser(user);
+                
+                // Fetch events from API -- Jose
+                const response = await axios.get("http://localhost:3000/eventS");
+                setEvents(response.data);
+            } catch (error) {
+                console.error('Error loading data:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
     }, []);
 
+    // Helper function for date formatting - good separation of concerns
     const formatDate = (dateString) => {
         try {
             return new Date(dateString).toLocaleString();
@@ -85,6 +39,7 @@ const Event_stats = () => {
         }
     };
 
+    // Loading state handling - good UX
     if (loading) {
         return <div className="event-stats-container">Loading...</div>;
     }

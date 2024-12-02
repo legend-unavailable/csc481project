@@ -5,7 +5,7 @@ import "../styles/login.css";//Elizabeth added
 import axios from "axios";
 
 const Login = (props) =>{
-    //state declarations for email, apssword, and error message
+    //state declarations for email, password, and error message
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState();
     const [showErr, setErr] = useState(false);
@@ -105,6 +105,18 @@ const Login = (props) =>{
                         <button type="submit" className="submit-btn">
                             Login
                         </button>
+
+                        {/* Added Sign Up Section */}
+                        <div className="signup-section">
+                            <p>Don't have an account?</p>
+                            <button 
+                                type="button" 
+                                className="signup-btn"
+                                onClick={() => navigate('/signup')}
+                            >
+                                Sign Up
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

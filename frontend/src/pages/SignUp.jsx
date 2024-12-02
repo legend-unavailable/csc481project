@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/SignUp.css"; //Elizabeth added
 
 const SignUp = () => {
     const [user, setUser] = useState();
@@ -42,69 +43,82 @@ const SignUp = () => {
           errors.lower = false; // Contains a lowercase letter
         }
 
-          // Break early if all criteria are met
+        // Break early if all criteria are met
         if (!errors.number && !errors.upper && !errors.lower) break;
       }
       setErrStatus(errors);
 
       return !Object.values(errors).some((value) => value);
-
     }
 
     return (
-      <>
-        <form >
-          <label htmlFor="">Enter your first name</label><br />
-          <input
-            type="text"
-            name=""
-            id=""
-            required
-            onChange={(e) => setUser({ ...user, firstName: e.target.value })}
-          /> <br />
+        <div className="signup-container">
+            <div className="main-content">
+                <div className="form-container">
+                    <div className="logo-container">
+                        <h1 className="logo-text">Create Account</h1>
+                    </div>
 
-          <label htmlFor="">Enter your last name</label><br />
-          <input
-            type="text"
-            name=""
-            id=""
-            required
-            onChange={(e) => setUser({ ...user, lastName: e.target.value })}
-          /> <br />
+                    <form onSubmit={submit}>
+                        <div className="form-group">
+                            <label htmlFor="firstName">Enter your first name</label>
+                            <input
+                                type="text"
+                                id="firstName"
+                                required
+                                onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+                            />
+                        </div>
 
-          <label htmlFor="">Enter your Email</label><br />
-          <input
-            type="email"
-            name=""
-            id=""
-            required
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-          /> <br />
+                        <div className="form-group">
+                            <label htmlFor="lastName">Enter your last name</label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                required
+                                onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                            />
+                        </div>
 
-          <label htmlFor="">Create a password</label> <br />
-          {errStatus.length && <p>Password must be at least 6 characters long</p>}
-          {errStatus.upper && <p>Password must contain at least one upper case letter</p> }
-          {errStatus.lower &&<p>Password must contain at least one lower case letter</p> }
-          {errStatus.number && <p>Password must contain at least one number</p>}
-          {errStatus.special && <p>Passwork must contain at least one special character e.g. $, @, &, etc.</p>}
-          <input
-            type="text"
-            name=""
-            id=""
-            required
-            onChange={(e) => {setUser({...user, password: e.target.value})}}
-          /> <br />
+                        <div className="form-group">
+                            <label htmlFor="email">Enter your Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                required
+                                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                            />
+                        </div>
 
-          <button type="submit" onClick={submit}>
-            Create Account
-          </button>
+                        <div className="form-group">
+                            <label htmlFor="password">Create a password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                required
+                                onChange={(e) => {setUser({...user, password: e.target.value})}}
+                            />
+                            <div className="password-requirements">
+                                {errStatus.length && <p>Password must be at least 6 characters long</p>}
+                                {errStatus.upper && <p>Password must contain at least one upper case letter</p>}
+                                {errStatus.lower && <p>Password must contain at least one lower case letter</p>}
+                                {errStatus.number && <p>Password must contain at least one number</p>}
+                                {errStatus.special && <p>Password must contain at least one special character e.g. $, @, &, etc.</p>}
+                            </div>
+                        </div>
 
-          <div>
-            <button>google</button>
-            <button>twitter</button>
-          </div>
-        </form>
-      </>
+                        <button type="submit" className="submit-btn">
+                            Create Account
+                        </button>
+
+                        <div className="social-login">
+                            <button type="button">Google</button>
+                            <button type="button">Twitter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     );
 }
 export default SignUp;

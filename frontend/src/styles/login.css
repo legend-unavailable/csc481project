@@ -123,3 +123,32 @@ form {
     /* Added property */
     width: 100%;
 }
+
+/*Added the signup */
+.signup-section {
+    margin-top: 1.5rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.signup-section p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.signup-btn {
+    background: transparent;
+    color: #4a148c;
+    border: 2px solid #4a148c;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+    background: #4a148c;
+    color: white;
+}
