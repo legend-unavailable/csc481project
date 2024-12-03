@@ -15,7 +15,8 @@ const Home = () => {
 
   useEffect(() => {fetchApi()}, []);
   // Get user info from localStorage
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || { name: 'Guest' };
+  /*const currentUser = JSON.parse(localStorage.getItem('currentUser')) || { name: 'Guest' };*/
+  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || { first_name: 'Guest', last_name: '' };
 
   const handleNav = () => setShowNav(!showNav);
 
@@ -118,9 +119,8 @@ return (
       </nav>
       
       <div id="welcome">
-          <h1>Welcome {currentUser.name}</h1>
-          {/*<h1>Welcome {res.data.name}</h1>*/}
-        </div>
+        <h1>Welcome {currentUser.first_name} {currentUser.last_name}</h1>
+      </div>
 
         <div id="body">
           {/*<div id="messages">No new messages</div>*/}

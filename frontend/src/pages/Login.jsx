@@ -1,5 +1,4 @@
 import { useState } from "react";
-import users from "./Users"
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";//Elizabeth added
 import axios from "axios";
@@ -7,41 +6,31 @@ import axios from "axios";
 const Login = (props) =>{
     //state declarations for email, password, and error message
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState('');
     const [showErr, setErr] = useState(false);
     const navigate = useNavigate();
-
-    //checks if account with given email exists, returns true if yes, no otherwise
-    const checkEmail = () => {
-        let exists = false;
-        users.forEach((obj) => {if(obj.email === email) exists = true;})
-        return exists;
-    }
-
-    //checks if account with given password exists, return true if yes, no otherwise
-    const checkPassword = () => {
-        let exists = false;
-        users.forEach((obj) => {if(obj.password === password) exists = true;})
-        return exists;
-    }
 
     //validates user info by checking email and password, if info valid navigate to home page, else return error
     const validate = async(event) => {
         event.preventDefault();
 
-        if(checkEmail() && checkPassword()) {
-            // Find the user that matches the email
-            const currentUser = users.find(user => user.email === email);
-            
-            // Store user info in localStorage
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            
-            setErr(false);
-            const info = {email: email, password: password};
-            axios.get("http://localhost:3000/", {info});
-            navigate('/home');
+        try {
+            // Make API call to backend
+            const response = await axios.post("http://localhost:3001/api/login", {
+                email: email,
+                password: password
+            });
+
+            if (response.data) {
+                // Store user info in localStorage
+                localStorage.setItem('currentUser', JSON.stringify(response.data));
+                setErr(false);
+                navigate('/home');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            setErr(true);
         }
-        else setErr(true);
     }
 
     //event handlers for email and password
