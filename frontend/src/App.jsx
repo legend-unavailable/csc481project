@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const[response, setResponse] = useState('');
   const fetchAPI = async () => {
-    const response = await axios.get('http://localhost:3000/api');
+    const response = await axios.get('http://localhost:3001/api');
     setResponse(response.data.str);
     console.log(response.data.str);
     

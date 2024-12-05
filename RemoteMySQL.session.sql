@@ -25,3 +25,6 @@ JOIN users u ON ea.user_id = u.user_id;
 
 
 SELECT * FROM event_attendees_view;
+
+
+SELECT email, password_hash FROM users WHERE email = 'test@test.com';

@@ -140,3 +140,78 @@ input::placeholder {
 form {
     animation: formAppear 0.5s ease forwards;
 }
+
+/* For the guest list */
+.guest-list {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.guest-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    list-style: none;
+}
+
+.guest-list li:last-child {
+    border-bottom: none;
+}
+
+/* For error messages */
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    animation: formAppear 0.5s ease forwards;
+}
+
+/* For success messages */
+.success-message {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    animation: formAppear 0.5s ease forwards;
+}
+
+/* Style for email input */
+input[type="email"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+input[type="email"]:focus {
+    outline: none;
+    border-color: #4a148c;
+    box-shadow: 0 0 0 2px rgba(74, 20, 140, 0.1);
+    background-color: white;
+}
+
+/* For the finish button */
+button[type="button"] {
+    width: 100%;
+    padding: 1rem;
+    background-color: #4a148c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+button[type="button"]:hover {
+    background-color: #6a1b9a;
+}

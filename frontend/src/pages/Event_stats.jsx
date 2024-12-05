@@ -11,29 +11,37 @@ const Event_stats = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            // Get current user and events from localStorage
             try {
                 // Gets user data from localStorage
                 const user = JSON.parse(localStorage.getItem('currentUser'));
+                if (!user) {
+                    navigate('/'); // Redirect to login if no user
+                    return;
+                }
                 setCurrentUser(user);
                 
-                // Fetch events from API -- Jose
-                const response = await axios.get("http://localhost:3000/eventS");
-                setEvents(response.data);
+                // Fetch events from API with error logging
+                const response = await axios.get("http://localhost:3001/api/events");
+                if (response.data) {
+                    setEvents(response.data);
+                    console.log('Events loaded:', response.data);
+                }
             } catch (error) {
-                console.error('Error loading data:', error);
+                console.error('Error details:', error.response || error);
+                setEvents([]); // Set empty array on error
             } finally {
                 setLoading(false);
             }
         };
-
+    
         fetchData();
-    }, []);
+    }, [navigate]); // Add navigate to dependencies
 
     // Helper function for date formatting - good separation of concerns
-    const formatDate = (dateString) => {
+    const formatDate = (dateString, timeString) => {
         try {
-            return new Date(dateString).toLocaleString();
+            const date = new Date(`${dateString}T${timeString}`);
+            return date.toLocaleString();
         } catch (error) {
             return 'Invalid Date';
         }
@@ -67,25 +75,43 @@ const Event_stats = () => {
                 ) : (
                     <div className="events-list">
                         {events.map((event, index) => (
-                            <div key={event.id || index} className="event-card">
+                            <div key={event.event_id || index} className="event-card">
                                 <div className="event-card-header">
-                                    <h2>{event.name}</h2>
-                                    <span className={`event-type ${event.type}`}>
-                                        {event.type}
+                                    <h2>{event.event_name}</h2>
+                                    <span className={`event-type ${event.event_type}`}>
+                                        {event.event_type}
                                     </span>
                                 </div>
                                 
                                 <div className="event-details">
                                     <p><strong>Location:</strong> {event.location}</p>
-                                    <p><strong>Date:</strong> {formatDate(event.date)}</p>
+                                    <p><strong>Date:</strong> {formatDate(event.event_date, event.event_time)}</p>
                                     <p><strong>Duration:</strong> {event.duration}</p>
-                                    <p><strong>Max Attendees:</strong> {event.maxAttendees}</p>
-                                    <p><strong>Created By:</strong> {event.createdBy}</p>
-                                    <p><strong>Current Attendees:</strong> {event.attendees?.length || 0}</p>
+                                    <p><strong>Max Attendees:</strong> {event.max_attendees}</p>
+                                    <p><strong>Created By:</strong> {`${event.organizer_first_name} ${event.organizer_last_name}`}</p>
+    
+                                    {/* Add this section for attendees */}
+                                    {currentUser && event.organizer_id === currentUser.user_id && (
+                                        <div className="attendees-section">
+                                            <h3>Attendees ({event.accepted_count}/{event.attendee_count})</h3>
+                                            {event.attendees && event.attendees.length > 0 ? (
+                                                <ul className="attendees-list">
+                                                    {event.attendees.map((attendee, idx) => (
+                                                        <li key={idx} className={`attendee-item ${attendee.status}`}>
+                                                            <span>{attendee.first_name} {attendee.last_name}</span>
+                                                            <span className="attendee-status">{attendee.status}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                <p>No attendees yet</p>
+                                            )}
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="event-actions">
-                                    {currentUser && event.createdBy === currentUser.email ? (
+                                    {currentUser && event.organizer_id === currentUser.user_id ? (
                                         <>
                                             <button 
                                                 className="edit-btn"

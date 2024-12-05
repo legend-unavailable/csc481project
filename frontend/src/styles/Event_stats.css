@@ -138,3 +138,82 @@
     background-color: #e3f2fd;
     color: #1976d2;
 }
+
+.attendees-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.attendees-list {
+    list-style: none;
+    padding: 0;
+}
+
+.attendee-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.attendee-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.attendee-item.invited .attendee-status {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.attendee-item.accepted .attendee-status {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.attendee-item.declined .attendee-status {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.success-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+    z-index: 1000;
+    min-width: 300px;
+}
+
+.success-alert h2 {
+    color: #4a148c;
+    margin-bottom: 1rem;
+}
+
+.success-alert button {
+    background-color: #4a148c;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.success-alert button:hover {
+    background-color: #6a1b9a;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

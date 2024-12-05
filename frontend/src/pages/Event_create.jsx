@@ -1,7 +1,14 @@
-import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Added useEffect import
 import { useNavigate } from "react-router-dom";
-import "../styles/Event_create.css";
+import "../styles/Event_create.css";//Eliabeth added 
+import axios from "axios";
+
+const SuccessAlert = ({ message, onClose }) => (
+    <div className="success-alert">
+        <h2>{message}</h2>
+        <button onClick={onClose}>OK</button>
+    </div>
+);
 
 const Event_create = () => {
     // State management for both form steps
@@ -16,6 +23,43 @@ const Event_create = () => {
     const [email, setEmail] = useState('');
     const [guests, setGuests] = useState([]);
     const [event, setEvent] = useState({});
+
+    // New states for database integration
+    const [availableUsers, setAvailableUsers] = useState([]);
+    const [isOrganizer, setIsOrganizer] = useState(false);
+
+    // Check if user is organizer and fetch available users
+    useEffect(() => {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        // Check if user is organizer
+        const checkOrganizer = async () => {
+            try {
+                const response = await axios.get(`http://localhost:3001/api/check-organizer/${currentUser.user_id}`);
+                setIsOrganizer(response.data.isOrganizer);
+                if (!response.data.isOrganizer) {
+                    alert('Only organizers can create events');
+                    navigate('/home');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                navigate('/home');
+            }
+        };
+
+        // Get all users for invites
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/api/users');
+                setAvailableUsers(response.data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        checkOrganizer();
+        fetchUsers();
+    }, [navigate]);
 
     // Date validation function from first version
     const checkTime = () => {
@@ -45,20 +89,38 @@ const Event_create = () => {
     };
 
     // Guest management functions
+     // Modified addGuests to verify against database users
     const addGuests = (e) => {
-        e.preventDefault();
-        setGuests([...guests, {name: name, email: email}]);
-        document.getElementById('name').value = '';
-        document.getElementById("email").value = "";
+       e.preventDefault();
+       const userExists = availableUsers.find(user => user.email === email);
+       if (userExists) {
+           setGuests([...guests, {
+               user_id: userExists.user_id,
+               name: `${userExists.first_name} ${userExists.last_name}`,
+               email: userExists.email
+           }]);
+           document.getElementById('name').value = '';
+           document.getElementById("email").value = "";
+           setName('');
+           setEmail('');
+       } else {
+           alert('User not found in system');
+       }
     };
 
+    // Modified endEvent to use new API endpoint
     const endEvent = async() => {
-        setEvent({...event, guests: guests});
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         try {
-            await axios.post('http://localhost:3000/eCreate', {event});
+            const response = await axios.post('http://localhost:3001/api/create-event', {
+                event: {...event, organizerId: currentUser.user_id},
+                guests
+            });
+            alert('Event created successfully!');
             navigate('/home');
         } catch (error) {
-            console.log(error);
+            console.error('Error creating event:', error);
+            alert('Failed to create event');
         }
     };
 
@@ -75,7 +137,7 @@ const Event_create = () => {
     ) : (
         guests.map((guest, id = 0) => (
             <li key={id++}>
-                Name: {guest.name} | Email: {guest.email} | ID: {id}
+                Name: {guest.name} | Email: {guest.email}
                 <br />
             </li>
         ))
@@ -83,8 +145,10 @@ const Event_create = () => {
 
     return (
         <div className="event-container">
+            {/* Your existing form JSX stays exactly the same */}
             {showForm && (
                 <form onSubmit={handleFirstFormSubmit}>
+                    {/* All your existing form fields remain the same */}
                     <label htmlFor="name">Enter a name for your event</label>
                     <input 
                         type="text" 
